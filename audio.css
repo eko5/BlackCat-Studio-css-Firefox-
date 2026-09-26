@@ -1,0 +1,94 @@
+/* ============================================================
+   Większa, kolorowa (RGB) ikonka audio w kartach + druga linia
+   Firefox 155 — dodatek do userChrome.css
+   ============================================================ */
+
+/* --- Pozwól karcie na dwie linie (tytuł + status audio) --- */
+.tabbrowser-tab .tab-content {
+  flex-wrap: wrap !important;
+  align-items: center;
+  row-gap: 1px;
+}
+
+.tabbrowser-tab .tab-label-container {
+  flex-basis: 100%;
+}
+
+/* --- Większa ikonka audio: karty zwykłe i przypięte --- */
+.tabbrowser-tab .tab-icon-sound,
+.tabbrowser-tab[pinned] .tab-icon-sound {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  margin-inline: 4px !important;
+}
+
+/* Przypięte karty są małe — ikonkę osadzamy w rogu, żeby nie
+   rozwalić układu, ale nadal większą niż domyślna */
+.tabbrowser-tab[pinned] .tab-icon-sound {
+  width: 15px !important;
+  height: 15px !important;
+  min-width: 15px !important;
+  min-height: 15px !important;
+  position: relative;
+  inset-block-end: -3px;
+  inset-inline-end: -3px;
+}
+
+/* --- Kolor RGB w zależności od stanu (zamiast szarej maski) ---
+   -moz-context-properties: fill pozwala nadpisać kolor natywnej
+   ikonki SVG dowolną wartością rgb() */
+.tabbrowser-tab[soundplaying] .tab-icon-sound {
+  -moz-context-properties: fill;
+  fill: rgb(46, 204, 113);      /* zielony = dźwięk gra */
+}
+
+.tabbrowser-tab[muted] .tab-icon-sound {
+  -moz-context-properties: fill;
+  fill: rgb(231, 76, 60);       /* czerwony = wyciszone */
+}
+
+.tabbrowser-tab[activemedia-blocked] .tab-icon-sound {
+  -moz-context-properties: fill;
+  fill: rgb(241, 196, 15);      /* żółty = autoplay zablokowany */
+}
+
+/* --- Druga linia z opisem statusu audio pod tytułem karty --- */
+.tabbrowser-tab[soundplaying] .tab-text,
+.tabbrowser-tab[muted] .tab-text,
+.tabbrowser-tab[activemedia-blocked] .tab-text {
+  display: block;
+}
+
+.tabbrowser-tab[soundplaying] .tab-label::after,
+.tabbrowser-tab[muted] .tab-label::after,
+.tabbrowser-tab[activemedia-blocked] .tab-label::after {
+  display: block;
+  font-size: 10px;
+  line-height: 1.2;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.tabbrowser-tab[soundplaying] .tab-label::after {
+  content: "🔊 Odtwarza dźwięk";
+  color: rgb(46, 204, 113);
+}
+
+.tabbrowser-tab[muted] .tab-label::after {
+  content: "🔇 Wyciszono";
+  color: rgb(231, 76, 60);
+}
+
+.tabbrowser-tab[activemedia-blocked] .tab-label::after {
+  content: "⏸ Autoodtwarzanie zablokowane";
+  color: rgb(241, 196, 15);
+}
+
+/* Delikatnie podnieś wysokość karty, żeby druga linia się mieściła */
+.tabbrowser-tab[soundplaying],
+.tabbrowser-tab[muted],
+.tabbrowser-tab[activemedia-blocked] {
+  min-height: 44px !important;
+}

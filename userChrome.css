@@ -1,0 +1,418 @@
+/* Import */
+
+@import url(audio.css);
+@import url(fullscree.css);
+@import url(Fullscreen-warning.css);
+@import url(Windows11close.css);
+@import url(progressbar.css);
+@import url(tab-animation.css);
+@import url(arrowscrollbox.css);
+@import url(rgbprogressbar.css);
+
+
+/* ==========================================================================
+   FIREFOX AERO GLASS THEME (WINDOWS 7 FULL SUITE)
+   Dla Firefox 155+
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. GŁÓWNE ZMIENNE MROŻONEGO SZKŁA AERO
+   -------------------------------------------------------------------------- */
+:root {
+  /* Kolorystyka Windows 7 Aero (możesz dostosować przeźroczystość/odcień) */
+  --aero-glass-bg: rgb(210, 230, 250) !important;
+  --aero-glass-border: rgba(206, 50, 50, 0.6) !important;
+  --aero-glass-shadow: 0 8px 24px rgba(0, 30, 80, 0.25), 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  --aero-blue-glow: rgba(0, 120, 215, 0.3) !important;
+  
+  --aero-tab-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(200,225,255,0.3) 50%, rgba(170,205,245,0.5) 100%) !important;
+  --aero-tab-active-bg: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(230,242,255,0.85) 50%, rgba(255,255,255,0.9) 100%) !important;
+  --aero-button-hover: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(180,215,255,0.6) 100%) !important;
+  
+  --aero-radius: 6px !important;
+  --aero-font: "Segoe UI", Tahoma, sans-serif !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. PASEK TYTUŁU I PASKI NARZĘDZI (AERO GLASS)
+   -------------------------------------------------------------------------- */
+#navigator-toolbox,
+#TabsToolbar,
+#nav-bar,
+#PersonalToolbar {
+  background: var(--aero-glass-bg) !important;
+  backdrop-filter: blur(25px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(0, 40, 80, 0.728) !important;
+  box-shadow: inset 0 1px 0 rgba(229, 225, 225, 0.997) !important;
+  font-family: var(--aero-font) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. KARTY (TABS) W STYLU WINDOWS 7
+   -------------------------------------------------------------------------- */
+.tabbrowser-tab .tab-stack {
+  margin-top: 2px !important;
+}
+
+.tab-background {
+  background: var(--aero-tab-bg) !important;
+  border: 1px solid rgba(100, 140, 180, 0.5) !important;
+  border-bottom: none !important;
+  border-radius: var(--aero-radius) var(--aero-radius) 0 0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8) !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
+.tabbrowser-tab:hover .tab-background {
+  background: var(--aero-button-hover) !important;
+  border-color: #3c7fb1 !important;
+  box-shadow: inset 0 1px 0 #ffffff, 0 0 8px rgba(100, 180, 255, 0.6) !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+  background: var(--aero-tab-active-bg) !important;
+  border-color: #0586e9 !important;
+  box-shadow: inset 0 1px 0 #ffffff, 0 -1px 3px rgba(0,0,0,0.1) !important;
+}
+
+.tab-label {
+  font-family: var(--aero-font) !important;
+  font-weight: 500 !important;
+  color: #256bb1 !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9), 0 0 3px #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. KLASYCZNY POMARAŃCZOWY PRZYCISK "FIREFOX"
+   -------------------------------------------------------------------------- */
+#PanelUI-button {
+  order: -1 !important;
+  margin-right: 6px !important;
+  margin-left: 2px !important;
+}
+
+#PanelUI-menu-button .toolbarbutton-icon {
+  display: none !important;
+}
+
+#PanelUI-menu-button {
+  -moz-appearance: none !important;
+  background: linear-gradient(180deg, #fb8e00 0%, #d65500 50%, #b03000 100%) !important;
+  border: 1px solid #8f2000 !important;
+  border-radius: 0 0 4px 4px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+  padding: 2px 14px 4px 14px !important;
+  height: 24px !important;
+  margin-top: 0px !important;
+  cursor: pointer !important;
+}
+
+#PanelUI-menu-button::before {
+  content: "Firefox" !important;
+  color: #ffffff !important;
+  font-family: var(--aero-font) !important;
+  font-weight: bold !important;
+  font-size: 11px !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7), 0 0 4px rgba(255, 200, 100, 0.6) !important;
+}
+
+#PanelUI-menu-button:hover {
+  background: linear-gradient(180deg, #ffad33 0%, #e66a00 50%, #cc3b00 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 140, 0, 0.8) !important;
+}
+
+#PanelUI-menu-button[open="true"],
+#PanelUI-menu-button:active {
+  background: linear-gradient(180deg, #a02800 0%, #c84800 100%) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. OKRĄGŁE PRZYCISKI NAWIGACJI (WSTECZ / DALEJ)
+   -------------------------------------------------------------------------- */
+#back-button,
+#forward-button {
+  padding: 2px !important;
+}
+
+/* Przycisk Wstecz */
+#back-button .toolbarbutton-icon {
+  width: 32px !important;
+  height: 32px !important;
+  padding: 6px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(210, 230, 250, 0.7) 45%, 
+    rgba(170, 205, 240, 0.8) 50%, 
+    rgba(195, 225, 255, 0.9) 100%
+  ) !important;
+  border: 1px solid #5f82a6 !important;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.9), 
+    0 1px 3px rgba(0, 30, 80, 0.3),
+    0 0 4px rgba(0, 120, 215, 0.2) !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
+#back-button:not([disabled="true"]):hover .toolbarbutton-icon {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 1) 0%, 
+    rgba(220, 240, 255, 0.9) 45%, 
+    rgba(150, 210, 255, 0.95) 50%, 
+    rgba(180, 230, 255, 1) 100%
+  ) !important;
+  border-color: #3c7fb1 !important;
+  box-shadow: 
+    inset 0 1px 0 #ffffff, 
+    0 0 10px rgba(0, 140, 255, 0.7),
+    0 1px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+#back-button:not([disabled="true"]):active .toolbarbutton-icon {
+  background: linear-gradient(180deg, rgba(160, 195, 230, 0.9) 0%, rgba(190, 215, 240, 0.9) 100%) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 30, 80, 0.5) !important;
+}
+
+/* Przycisk Dalej */
+#forward-button .toolbarbutton-icon {
+  width: 26px !important;
+  height: 26px !important;
+  padding: 5px !important;
+  border-radius: 50% !important;
+  margin-left: -4px !important;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.8) 0%, 
+    rgba(215, 230, 245, 0.6) 50%, 
+    rgba(180, 210, 240, 0.7) 100%
+  ) !important;
+  border: 1px solid #7f9db9 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+#forward-button:not([disabled="true"]):hover .toolbarbutton-icon {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(190, 225, 255, 0.8) 100%) !important;
+  border-color: #3c7fb1 !important;
+  box-shadow: inset 0 1px 0 #ffffff, 0 0 6px rgba(0, 140, 255, 0.5) !important;
+}
+
+#back-button[disabled="true"] .toolbarbutton-icon,
+#forward-button[disabled="true"] .toolbarbutton-icon {
+  opacity: 0.45 !important;
+  background: linear-gradient(180deg, rgba(240, 240, 240, 0.5) 0%, rgba(200, 200, 200, 0.3) 100%) !important;
+  border-color: #a0a0a0 !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. WKLĘSŁY / TRÓJWYMIAROWY PASEK ADRESU I WYSZUKIWANIA
+   -------------------------------------------------------------------------- */
+#urlbar-background,
+.searchbar-textbox {
+  background: linear-gradient(180deg, 
+    #e2e8f0 0%, 
+    #ffffff 12%, 
+    #ffffff 85%, 
+    #f4f7fa 100%
+  ) !important;
+  border-top: 1px solid #718da9 !important;
+  border-left: 1px solid #8e9cae !important;
+  border-right: 1px solid #a3b3c6 !important;
+  border-bottom: 1px solid #d9e3ed !important;
+  border-radius: 3px !important;
+  box-shadow: 
+    inset 1px 1px 2px rgba(0, 20, 50, 0.25),
+    inset 0 2px 4px rgba(0, 0, 0, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+#urlbar:hover #urlbar-background,
+.searchbar-textbox:hover {
+  border-top-color: #5d7ca0 !important;
+  border-left-color: #788d9c !important;
+  box-shadow: 
+    inset 1px 1px 2px rgba(0, 20, 50, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 0 5px rgba(0, 120, 215, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+#urlbar[focused="true"] #urlbar-background,
+.searchbar-textbox[focused="true"] {
+  background: #ffffff !important;
+  border: 1px solid #3d7bad !important;
+  box-shadow: 
+    inset 1px 1px 2px rgba(0, 0, 0, 0.2),
+    0 0 6px rgba(55, 160, 255, 0.8),
+    0 0 2px rgba(0, 120, 215, 0.5) !important;
+}
+
+#urlbar-input-container,
+.searchbar-textbox {
+  color: #000000 !important;
+  font-family: var(--aero-font) !important;
+  font-size: 13px !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. PASEK ZAKŁADEK I ZAKŁADKI W STYLU WINDOWS 7
+   -------------------------------------------------------------------------- */
+#PersonalToolbar {
+  padding: 2px 4px 3px 4px !important;
+  background: var(--aero-glass-bg) !important;
+  backdrop-filter: blur(25px) saturate(180%) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.6) !important;
+  border-bottom: 1px solid rgba(0, 30, 70, 0.25) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+#PlacesToolbarItems .bookmark-item {
+  -moz-appearance: none !important;
+  padding: 3px 8px !important;
+  margin: 0 2px !important;
+  border-radius: 3px !important;
+  border: 1px solid transparent !important;
+  color: #1e69b3 !important;
+  font-family: var(--aero-font) !important;
+  font-size: 12px !important;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 0 2px #ffffff !important;
+  transition: all 0.12s ease-in-out !important;
+}
+
+#PlacesToolbarItems .bookmark-item:hover {
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.85) 0%, 
+    rgba(210, 230, 250, 0.6) 50%, 
+    rgba(185, 215, 245, 0.75) 100%
+  ) !important;
+  border: 1px solid #7da2ce !important;
+  box-shadow: 
+    inset 0 1px 0 #ffffff, 
+    0 0 6px rgba(100, 180, 255, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  color: #000000 !important;
+}
+
+#PlacesToolbarItems .bookmark-item:active,
+#PlacesToolbarItems .bookmark-item[open="true"] {
+  background: linear-gradient(180deg, rgba(170, 200, 230, 0.8) 0%, rgba(200, 225, 250, 0.8) 100%) !important;
+  border-color: #5c82ab !important;
+  box-shadow: inset 0 1px 2px rgba(0, 30, 70, 0.3) !important;
+}
+
+#PlacesToolbarItems .bookmark-item .toolbarbutton-icon {
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 5px !important;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2)) !important;
+}
+
+.bookmark-item[container="true"] {
+  list-style-image: url("chrome://global/skin/icons/folder.svg") !important;
+}
+
+#PlacesToolbarItems toolbarseparator {
+  -moz-appearance: none !important;
+  width: 2px !important;
+  margin: 2px 4px !important;
+  border-left: 1px solid rgba(0, 40, 80, 0.2) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.7) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. MENU PRAWEGO KLIKU (MENU KONTEKSTOWE z IKONAMI)
+   -------------------------------------------------------------------------- */
+menupopup,
+panel {
+  --panel-background: rgba(240, 245, 255, 0.75) !important;
+  --panel-border-color: var(--aero-glass-border) !important;
+}
+
+menupopup {
+  -moz-appearance: none !important;
+  background: rgba(235, 243, 253, 0.75) !important;
+  backdrop-filter: blur(25px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  outline: 1px solid rgba(0, 30, 80, 0.25) !important;
+  border-radius: 6px !important;
+  box-shadow: var(--aero-glass-shadow) !important;
+  padding: 4px !important;
+}
+
+menuitem, menu {
+  -moz-appearance: none !important;
+  border-radius: 4px !important;
+  padding: 5px 10px !important;
+  color: #111111 !important;
+  font-family: var(--aero-font) !important;
+  font-size: 12px !important;
+}
+
+menuitem:hover, menu:hover,
+menuitem[selected="true"], menu[selected="true"] {
+  background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(190,225,255,0.75) 100%) !important;
+  border: 1px solid #7da2ce !important;
+  box-shadow: inset 0 0 1px #ffffff !important;
+  color: #000000 !important;
+}
+
+menuseparator {
+  -moz-appearance: none !important;
+  border-top: 1px solid rgba(0, 40, 80, 0.12) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6) !important;
+  margin: 4px 2px !important;
+}
+
+/* Włączenie i stylizacja ikon w menu prawego kliku */
+menuitem .menu-iconic-icon,
+menu .menu-iconic-icon {
+  display: inline-block !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-right: 8px !important;
+}
+
+/* Ikony systemowe dla poszczególnych akcji */
+#context-back { list-style-image: url("chrome://browser/skin/back.svg") !important; }
+#context-forward { list-style-image: url("chrome://browser/skin/forward.svg") !important; }
+#context-reload { list-style-image: url("chrome://browser/skin/reload.svg") !important; }
+#context-stop { list-style-image: url("chrome://global/skin/icons/close.svg") !important; }
+#context-bookmarkpage, #context-bookmarklink { list-style-image: url("chrome://browser/skin/bookmark-hollow.svg") !important; }
+#context-savepage, #context-savelink { list-style-image: url("chrome://browser/skin/save.svg") !important; }
+#context-openlinkintab { list-style-image: url("chrome://tabbrowser/skin/tabs.svg") !important; }
+#context-openlinkincurrent { list-style-image: url("chrome://global/skin/icons/arrow-right.svg") !important; }
+#context-copy, #context-copylink { list-style-image: url("chrome://global/skin/icons/edit-copy.svg") !important; }
+#context-paste { list-style-image: url("chrome://global/skin/icons/edit-paste.svg") !important; }
+#context-selectall { list-style-image: url("chrome://global/skin/icons/select-all.svg") !important; }
+#context-inspect { list-style-image: url("chrome://developer/skin/images/debugger.svg") !important; }
+#context-searchselect { list-style-image: url("chrome://global/skin/icons/search-glass.svg") !important; }
+
+menuitem:not([class*="menu-iconic"]) {
+  padding-left: 28px !important;
+}
+
+/* Zastosowanie stylu scrollbara do interfejsu Firefoxa */
+:-moz-any(#main-window, window, page) {
+  scrollbar-color: #333333 #ffffff !important;
+  scrollbar-width: auto !important;
+}
+
+scrollbox, scrollbar {
+  background-color: transparent !important;
+}
+
+scrollbar-thumb {
+  background-color: #333333 !important;
+  border-radius: 10px !important;
+  border: 3px solid #ffffff !important;
+}
+
+scrollbar-thumb:hover {
+  background-color: #555555 !important;
+}
+
+
+

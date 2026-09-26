@@ -1,0 +1,302 @@
+/* ==========================================================================
+   ZAAWANSOWANY MOTYW SYSTEMOWY DLA FIREFOX 155 — userContent.css
+   Stylizacja stron wewnętrznych "about:*"
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. PREFERENCJE (about:preferences) — pełne przeprojektowanie
+   -------------------------------------------------------------------------- */
+@-moz-document url-prefix("about:preferences") {
+  body {
+    background: linear-gradient(180deg, #eaf4ff 0%, #d3e8fb 100%) !important;
+    font-family: "Segoe UI", sans-serif !important;
+  }
+  #categories {
+    background: linear-gradient(180deg, #cfe3f7, #a9cdec) !important;
+    border-right: 1px solid #6ea1d8 !important;
+    border-radius: 0 12px 12px 0 !important;
+  }
+  .category.selected {
+    background: linear-gradient(to right, #ffffff, #eaf4ff) !important;
+    border-left: 3px solid #2a6ec4 !important;
+  }
+  groupbox, .subcategory {
+    background: rgba(255,255,255,0.75) !important;
+    border: 1px solid #a9d3f5 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+  }
+  button, xul\:button {
+    border-radius: 6px !important;
+    background: linear-gradient(to bottom, #ffffff, #cfe3f7) !important;
+    border: 1px solid #6ea1d8 !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. DODATKI (about:addons) — przeprojektowany widok listy i kart
+   -------------------------------------------------------------------------- */
+@-moz-document url-prefix("about:addons") {
+  body, addon-page-header {
+    background: linear-gradient(180deg, #eef4fb, #cfe1f5) !important;
+    font-family: "Segoe UI", sans-serif !important;
+  }
+  addon-card, .card {
+    background: rgba(255,255,255,0.85) !important;
+    border: 1px solid #a9d3f5 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.10) !important;
+  }
+  addon-card:hover {
+    box-shadow: 0 4px 12px rgba(42,110,196,0.25) !important;
+  }
+  categories-box, categories-box a {
+    background: linear-gradient(180deg, #cfe3f7, #a9cdec) !important;
+  }
+  named-deck-button[selected] {
+    border-left: 3px solid #2a6ec4 !important;
+    background: #ffffff !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. POBRANE PLIKI — strona biblioteki (about:downloads) z indywidualnym
+      stylem, spójnym z panelem pobierania z userChrome.css
+   -------------------------------------------------------------------------- */
+@-moz-document url-prefix("about:downloads") {
+  body {
+    background: linear-gradient(180deg, #f3fbf5, #dff3e4) !important;
+    font-family: "Segoe UI", sans-serif !important;
+  }
+  richlistitem, .download {
+    background: rgba(255,255,255,0.8) !important;
+    border: 1px solid #3aa35a !important;
+    border-radius: 8px !important;
+    margin: 4px 6px !important;
+  }
+  richlistitem:hover {
+    background: rgba(58,163,90,0.12) !important;
+  }
+  .downloadProgress {
+    accent-color: #3aa35a !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. NOWA KARTA I PRZYPIĘTE SKRÓTY — kafelki prostokątne:
+      ikona po lewej, informacja o stronie po prawej
+   -------------------------------------------------------------------------- */
+@-moz-document url-prefix("about:newtab"), url-prefix("about:home") {
+  body {
+    background: linear-gradient(180deg, #eaf4ff, #cfe1f5) !important;
+  }
+
+  /* siatka kafelków -> kafelki obok siebie w poziomie, zawijane w wiersze */
+  .top-sites-list, .top-sites-list-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  .top-site-outer {
+    width: 260px !important;
+    max-width: 260px !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  /* karta jako całość: wymuszony wiersz (row), nie kolumna */
+  .top-site-outer .top-site-inner,
+  .top-site-outer a.top-site-button {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    background: rgba(255,255,255,0.85) !important;
+    border: 1px solid #a9d3f5 !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    min-height: 44px !important;
+    height: auto !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.10) !important;
+  }
+
+  /* każdy bezpośredni kontener wewnątrz kafelka (ikona, opakowanie tytułu)
+     ma też iść w poziomie, żeby przebić domyślny układ kolumnowy Firefoksa */
+  .top-site-outer .top-site-inner > * {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: auto !important;
+  }
+
+  /* ikona / miniatura zawsze po lewej, stały rozmiar, bez rozciągania */
+  .top-site-outer .tile,
+  .top-site-outer .top-site-icon,
+  .top-site-outer .icon-wrapper,
+  .top-site-outer [class*="icon"] {
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    margin: 0 10px 0 0 !important;
+    border-radius: 6px !important;
+  }
+
+  /* nazwa / opis strony po prawej, wyśrodkowana pionowo, jeden wiersz z wielokropkiem */
+  .top-site-outer .title,
+  .top-site-outer .title-wrapper,
+  .top-site-outer [class*="title"] {
+    order: 2 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    text-align: left !important;
+    color: #17324f !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* mała ikonka lupy przy skrótach wyszukiwania - obok tekstu, nie nad nim */
+  .top-site-outer .search-topsite {
+    order: 0 !important;
+    margin-right: 4px !important;
+  }
+
+  .top-site-outer:hover .top-site-inner {
+    box-shadow: 0 3px 10px rgba(42,110,196,0.25) !important;
+    border-color: #2a6ec4 !important;
+  }
+
+  /* karty artykułów Pocket/Sponsorowane - spójny styl */
+  .card-outer {
+    border-radius: 10px !important;
+    border: 1px solid #a9d3f5 !important;
+    background: rgba(255,255,255,0.85) !important;
+  }
+}
+
+
+/* ========================================= */
+/* PŁONĄCE, OBRACAJĄCE SIĘ LOGO - WERSJA BEZ KWADRATU */
+/* ========================================= */
+
+@-moz-document url("about:newtab"), url("about:home") {
+
+    /* --- 1. Obracające się logo z płomieniami --- */
+    .logo-and-wordmark .logo {
+        animation: 
+            spin-logo 6s linear infinite,
+            float-logo 3s ease-in-out infinite;
+        
+        filter: 
+            drop-shadow(0 0 6px #ff4500)
+            drop-shadow(0 0 12px #ff6600)
+            drop-shadow(0 0 20px #ff8800);
+        
+        transform-origin: center center;
+        transition: filter 0.3s ease;
+    }
+
+    /* Intensywniejszy ogień po najechaniu */
+    .logo-and-wordmark:hover .logo {
+        filter: 
+            drop-shadow(0 0 10px #ff0000)
+            drop-shadow(0 0 20px #ff4500)
+            drop-shadow(0 0 35px #ff6600)
+            drop-shadow(0 0 50px #ff8800)
+            drop-shadow(0 0 70px #ffaa00);
+        animation: 
+            spin-logo 3s linear infinite,
+            float-logo 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spin-logo {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes float-logo {
+        0%, 100% { margin-top: 0; }
+        50%      { margin-top: -6px; }
+    }
+
+    /* --- 2. Napis "Firefox" --- */
+    .logo-and-wordmark .wordmark {
+        fill: #20123a !important;
+        transition: filter 0.3s ease;
+    }
+
+    .logo-and-wordmark:hover .wordmark {
+        filter: drop-shadow(0 0 8px rgba(255, 102, 0, 0.6));
+    }
+
+    /* --- 3. Delikatny żar w tle (BEZ kwadratu!) --- */
+    .logo-and-wordmark {
+        position: relative;
+    }
+
+    .logo-and-wordmark::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, 
+                    rgba(255, 102, 0, 0.15) 0%, 
+                    rgba(255, 140, 0, 0.05) 40%, 
+                    transparent 70%);
+        pointer-events: none;
+        z-index: -1;
+        animation: glow-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+        0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+        50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
+    }
+}
+
+
+/* ==========================================================================
+   Wymuszenie szerokiego paska przewijania (Scrollbar) w Firefox
+   ========================================================================== */
+
+/* Włączenie klasycznego, szerokiego stylu paska dla interfejsu i stron */
+:root {
+  scrollbar-width: auto !important; /* Zamienia cienki pasek (thin) na pełny/szeroki */
+}
+
+/* Dostosowanie grubości paska dla silnika Gecko (Firefox) */
+* {
+  scrollbar-color: rgba(150, 150, 150, 0.6) rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dedykowane zwiększenie rozmiarów paska (WebKit / Chromium fallback & Firefox UI) */
+::-webkit-scrollbar {
+  width: 158px !important;  /* Szerokość pionowego paska */
+  height: 158px !important; /* Wysokość poziomego paska */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5) !important;
+  border-radius: 9px !important;
+  border: 3px solid transparent !important;
+  background-clip: content-box !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.8) !important;
+}
+
+
+

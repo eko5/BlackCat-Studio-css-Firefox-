@@ -1,0 +1,79 @@
+/* === RGB Loading Throbber – większa lawenda === */
+.tabbrowser-tab[busy] .tab-throbber,
+.tabbrowser-tab[pending] .tab-throbber {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #b57edc,   /* lawenda */
+    #9b59d0,   /* mocniejsza lawenda */
+    #7d3cff,   /* fiolet-niebieski */
+    #ff6ec7,   /* róż/magenta */
+    #7ad7f0,   /* cyjan */
+    #b57edc    /* powrót do lawendy */
+  );
+  animation:
+    rgb-tab-spin 1.1s linear infinite,
+    rgb-tab-glow 2.4s ease-in-out infinite alternate;
+  box-shadow: 0 0 6px 1px rgba(181, 126, 220, 0.55);
+}
+
+/* delikatna "poduszka" lawendy pod ikoną, żeby kolor był bardziej widoczny */
+.tabbrowser-tab[busy] .tab-throbber::before,
+.tabbrowser-tab[pending] .tab-throbber::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181,126,220,0.35), transparent 70%);
+  z-index: -1;
+}
+
+@keyframes rgb-tab-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes rgb-tab-glow {
+  0%   { filter: hue-rotate(0deg)  drop-shadow(0 0 4px #b57edc); }
+  50%  { filter: hue-rotate(60deg) drop-shadow(0 0 8px #d6a8ff); }
+  100% { filter: hue-rotate(0deg)  drop-shadow(0 0 4px #b57edc); }
+}
+
+/* === Fioletowy obracający się spinner (ring) na kartach ładujących === */
+.tabbrowser-tab[busy] .tab-icon-image,
+.tabbrowser-tab[pending] .tab-icon-image {
+  visibility: hidden; /* chowamy zwykłą ikonkę favicon podczas ładowania */
+}
+
+.tabbrowser-tab[busy] .tab-throbber,
+.tabbrowser-tab[pending] .tab-throbber {
+  position: relative;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  background: none !important; /* wyłączamy poprzedni gradient, jeśli nie chcesz łączyć obu efektów */
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab[busy] .tab-throbber::after,
+.tabbrowser-tab[pending] .tab-throbber::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  border-top-color: #8a2be2;      /* fiolet */
+  border-right-color: #9b59d0;    /* jaśniejszy fiolet */
+  animation: violet-ring-spin 0.8s linear infinite;
+  filter: drop-shadow(0 0 3px rgba(138, 43, 226, 0.6));
+}
+
+@keyframes violet-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

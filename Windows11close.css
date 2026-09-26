@@ -1,0 +1,123 @@
+/* ==========================================================================
+   v5: przyciski okna w stylu Windows 11 (zawsze widoczne)
+   Ponieważ pasek kart jest przeniesiony pod pasek adresu, przyciski są
+   przypięte do prawego górnego rogu okna (nad paskiem adresu).
+   Wymaga: browser.tabs.inTitlebar = 1 i odznaczonego „Paska tytułu”
+   w trybie Dostosuj.
+   ========================================================================== */
+:root {
+  --w11-btn-width: 46px;
+  --w11-btn-height: 32px;
+  --w11-hover: rgba(0, 0, 0, 0.09);
+  --w11-active: rgba(0, 0, 0, 0.06);
+  --w11-close-hover: #C42B1C;
+  --w11-close-active: #B22A1B;
+}
+
+/* Kotwica dla przycisków: cały #navigator-toolbox */
+#navigator-toolbox { position: relative !important; }
+#TabsToolbar { position: static !important; }
+
+.titlebar-buttonbox-container {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  height: var(--w11-btn-height) !important;
+  -moz-window-dragging: no-drag !important;
+}
+.titlebar-buttonbox-container,
+.titlebar-buttonbox {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: stretch !important;
+  appearance: none !important;
+  -moz-appearance: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Zostaw miejsce w pasku adresu, żeby przyciski niczego nie zasłaniały */
+:root:not([inFullscreen]) #nav-bar {
+  padding-inline-end: calc(var(--w11-btn-width) * 3 + 8px) !important;
+}
+
+.titlebar-button {
+  appearance: none !important;
+  -moz-appearance: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  width: var(--w11-btn-width) !important;
+  min-width: var(--w11-btn-width) !important;
+  height: var(--w11-btn-height) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ie-text) !important;
+  transition: background-color 90ms linear;
+}
+.titlebar-button .toolbarbutton-icon {
+  width: 10px !important;
+  height: 10px !important;
+  opacity: 1 !important;
+  -moz-context-properties: stroke, fill !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+.titlebar-min {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M0 5.5h10' stroke='context-stroke' fill='none'/%3E%3C/svg%3E") !important;
+}
+.titlebar-max {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M.5.5h9v9h-9z' stroke='context-stroke' fill='none'/%3E%3C/svg%3E") !important;
+}
+.titlebar-restore {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M2.5 2.5V.5h7v7h-2M.5 2.5h7v7h-7z' stroke='context-stroke' fill='none'/%3E%3C/svg%3E") !important;
+}
+.titlebar-close {
+  list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath d='M0 0l10 10M10 0L0 10' stroke='context-stroke' fill='none'/%3E%3C/svg%3E") !important;
+}
+
+.titlebar-min:hover,
+.titlebar-max:hover,
+.titlebar-restore:hover {
+  background-color: var(--w11-hover) !important;
+}
+.titlebar-min:hover:active,
+.titlebar-max:hover:active,
+.titlebar-restore:hover:active {
+  background-color: var(--w11-active) !important;
+}
+.titlebar-close:hover {
+  background-color: var(--w11-close-hover) !important;
+  color: #fff !important;
+}
+.titlebar-close:hover:active {
+  background-color: var(--w11-close-active) !important;
+  color: #fff !important;
+}
+
+/* Nieaktywne okno: przyciski wyszarzone, ale nadal widoczne */
+:root:-moz-window-inactive .titlebar-button .toolbarbutton-icon {
+  opacity: 0.55 !important;
+}
+
+/* ==========================================================================
+   Poprawka: Firefox potrafi mieć w DOM drugi, domyślnie ukryty egzemplarz
+   .titlebar-buttonbox-container wewnątrz #nav-bar. Powyższe reguły z
+   "display/visibility/opacity: ... !important" wymuszają jego pokazanie,
+   przez co przyciski okna dublują się (jeden poprawnie w rogu okna,
+   drugi w środku paska adresu). Chowamy tylko tę zdublowaną kopię.
+   Selektor z #nav-bar ma wyższą specyficzność niż sama klasa, więc wygrywa
+   niezależnie od kolejności reguł w pliku.
+   ========================================================================== */
+#nav-bar .titlebar-buttonbox-container,
+#nav-bar .titlebar-buttonbox {
+  display: none !important;
+  visibility: collapse !important;
+}
